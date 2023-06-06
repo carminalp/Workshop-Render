@@ -93,8 +93,15 @@ jobs:
           cache-dependency-path: ./package.json
           node-version: 18
 
-      - name: 📥 Install deps
-        run: npm install
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: "12"
+          postgresql db: render
+          postgresql user: coffeebreak
+          postgresql password: Wizeliner
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
 
       - name: 🛠 Setup Database
         run: npx prisma migrate reset --force
@@ -106,6 +113,6 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           start: npm run start:mocks
-          wait-on: "http://localhost:8811"
+          wait-on: http://localhost:8811
         env:
-          PORT: "8811"
+          PORT: 8811
