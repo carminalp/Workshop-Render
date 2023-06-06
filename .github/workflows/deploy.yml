@@ -79,9 +79,6 @@ jobs:
   cypress:
     name: ⚫ Cypress
     runs-on: ubuntu-latest
-    env:
-      DATABASE_URL: postgres://coffeebreak:Wizeliner@localhost:5432/render
-      SESSION_SECRET: super-duper-s3cret
     steps:
       - name: ⬇ Checkout repo
         uses: actions/checkout@v3
